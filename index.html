@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="lt">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Juokų mygtukas</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: system-ui, sans-serif;
+      background: #fff7df;
+      color: #292344;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 1.5rem;
+    }
+
+    main {
+      width: min(100%, 32rem);
+      padding: 2.5rem 2rem;
+      border: 3px solid #292344;
+      border-radius: 1.5rem;
+      background: #fff;
+      box-shadow: 8px 8px 0 #292344;
+      text-align: center;
+    }
+
+    .emoji {
+      margin: 0;
+      font-size: 4rem;
+    }
+
+    h1 {
+      margin: 0.5rem 0;
+      font-size: clamp(2rem, 8vw, 3rem);
+    }
+
+    .intro {
+      color: #625e75;
+    }
+
+    #joke {
+      min-height: 3.5rem;
+      margin: 2rem 0;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    button {
+      padding: 0.9rem 1.3rem;
+      border: 3px solid #292344;
+      border-radius: 0.8rem;
+      background: #c8f169;
+      color: inherit;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 4px 4px 0 #292344;
+    }
+
+    button:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 #292344;
+    }
+
+    button:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 #292344;
+    }
+
+    button:focus-visible {
+      outline: 3px solid #6550d8;
+      outline-offset: 5px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="emoji" aria-hidden="true">🦆</p>
+    <h1>Juokų mygtukas</h1>
+    <p class="intro">Spausk ir gauk antį… tai yra, juokelį!</p>
+    <p id="joke" aria-live="polite">Kodėl kompiuteris nuėjo pas gydytoją? Nes pagavo virusą! 🦠</p>
+    <button id="joke-button" type="button">Dar vieną! 🥁</button>
+  </main>
+  <script>
+    const jokes = [
+      "Kodėl kompiuteris nuėjo pas gydytoją? Nes pagavo virusą! 🦠",
+      "Ką sako viena siena kitai? Susitiksim kampe! 🧱",
+      "Kodėl bananas nuėjo pas kirpėją? Nes norėjo nusilupti! 🍌",
+      "Ką veikia žuvis internete? Naršo! 🐟",
+      "Kodėl knyga buvo liūdna? Nes jos niekas nesuprato… 📚",
+      "Kaip vadinasi labai mandagus voras? Prašau-tinklis! 🕸️",
+      "Kodėl laikrodis visada pavargęs? Nes jam visą laiką bėga laikas! ⏰"
+    ];
+
+    const joke = document.querySelector("#joke");
+    const button = document.querySelector("#joke-button");
+    let previousIndex = 0;
+
+    button.addEventListener("click", () => {
+      let nextIndex;
+      do {
+        nextIndex = Math.floor(Math.random() * jokes.length);
+      } while (nextIndex === previousIndex);
+
+      previousIndex = nextIndex;
+      joke.textContent = jokes[nextIndex];
+    });
+  </script>
+</body>
+</html>
